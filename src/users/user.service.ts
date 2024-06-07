@@ -1,42 +1,61 @@
 import { Injectable } from '@nestjs/common';
+import { User } from './user.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 export interface Response<T> {
-    data: T
-    code: number
+  data: T;
+  code: number;
 }
-
-export interface User {
-    username: string
-    password: string
-    nickname?: string
-    avatar?: string
-}
-
-const users: User[] = [
-    {
-        username: "season",
-        password: "admin123",
-        nickname: "season",
-        avatar: "",
-    }
-]
 
 @Injectable()
 export class UserService {
-    login(username: string, password: string): Response<User[]> {
-        users.push({
-            username,
-            password,
-        })
-        return {
-            data: users,
-            code: 0
-        }
-    }
-    getUser(): Response<string> {
-        return {
-            data: "season",
-            code: 0
-        }
-    }
+  protected readonly repository: Repository<User>;
+  constructor(@InjectRepository(User) repository: Repository<User>) {
+    this.repository = repository;
+  }
+  /**
+   * 登录
+   * @param username 用户名
+   * @param password 密码
+   * @returns 用户信息
+   */
+  async login(username: string, password: string): Promise<Response<User>> {
+    const data = await this.repository.findOne({
+      where: {
+        username,
+        password,
+      },
+    });
+    return {
+      data,
+      code: 0,
+    };
+  }
+  /**
+   * 注册
+   */
+  async register(username: string, password: string): Promise<Response<User>> {
+    this.repository.save({
+      username,
+      password,
+    });
+    const data = await this.repository.findOne({
+      where: {
+        username,
+      },
+    });
+    return {
+      data,
+      code: 0,
+    };
+  }
+
+  async getUser(): Promise<Response<User[]>> {
+    const data = await this.repository.find();
+    return {
+      data,
+      code: 0,
+    };
+  }
 }
