@@ -17,4 +17,9 @@ export class UploadController {
   uploadAvatar(@UploadedFile() file: Express.Multer.File, @Req() req: Request) {
     return this.uploadService.updateAvatar(file, req);
   }
+  @Post('image')
+  @UseInterceptors(FileInterceptor('avatar'))
+  uploadImage(@UploadedFile() file: Express.Multer.File) {
+    return this.uploadService.updateImage(file);
+  }
 }

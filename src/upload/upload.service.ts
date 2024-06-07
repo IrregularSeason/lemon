@@ -12,4 +12,14 @@ export class UploadService {
     req;
     return file;
   }
+  async updateImage(@UploadedFile() file: Express.Multer.File) {
+    file.path = `${process.env.HOST}/static/${file.filename}`;
+    return file;
+  }
+  async uploadImages(@UploadedFile() files: Array<Express.Multer.File>) {
+    return files.map((file) => {
+      file.path = `${process.env.HOST}/static/${file.filename}`;
+      return file;
+    });
+  }
 }
