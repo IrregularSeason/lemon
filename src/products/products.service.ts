@@ -15,7 +15,11 @@ export class ProductsService {
   }
 
   async getProducts() {
-    const data = await this.repository.find();
+    const data = await this.repository.find({
+      order: {
+        id: 'DESC',
+      },
+    });
     return {
       data,
       code: 0,
