@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
+import { ProductsController } from './products.controller';
+import { ProductsService } from './products.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
 import { Repository } from 'typeorm';
+import { Product } from './product.entity';
 
 @Module({
   imports: [
-    // 配置数据源
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -18,11 +17,9 @@ import { Repository } from 'typeorm';
       autoLoadEntities: true,
       synchronize: false,
     }),
-    // 引入实体 required
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Product]),
   ],
-  controllers: [UserController],
-  providers: [UserService, Repository],
-  exports: [UserService],
+  controllers: [ProductsController],
+  providers: [ProductsService, Repository],
 })
-export class UserModule { }
+export class ProductsModule { }

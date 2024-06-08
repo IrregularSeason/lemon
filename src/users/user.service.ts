@@ -69,7 +69,7 @@ export class UserService {
     });
     return {
       data,
-      code: 0
-    }
+      code: 0,
+    };
   }
 }
