@@ -13,6 +13,6 @@ export class ProductsController {
 
   @Post('add')
   async addProduct(@Body() body: Product) {
-    this.productsService.addProduct(body);
+    return this.productsService.addProduct(body);
   }
 }

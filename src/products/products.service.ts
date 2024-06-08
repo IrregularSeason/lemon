@@ -11,7 +11,7 @@ export class ProductsService {
   }
 
   async addProduct(product: Product) {
-    this.repository.save(product);
+    return this.repository.save(product);
   }
 
   async getProducts() {

@@ -5,4 +5,5 @@ export class Product {
   @Column() name: string;
   @Column() description?: string;
   @Column() cover?: string;
+  @Column() price?: number;
 }
