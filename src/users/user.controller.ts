@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Get('find')
   getUser() {
@@ -18,5 +18,10 @@ export class UserController {
   @Post('register')
   register(@Body() body) {
     return this.userService.register(body.username, body.password);
+  }
+
+  @Post('create')
+  createUser(@Body() body) {
+    return this.userService.createUser(body);
   }
 }

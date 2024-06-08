@@ -58,4 +58,18 @@ export class UserService {
       code: 0,
     };
   }
+
+  async createUser(user: User): Promise<Response<User>> {
+    const { username } = user;
+    await this.repository.save(user);
+    const data = await this.repository.findOne({
+      where: {
+        username,
+      },
+    });
+    return {
+      data,
+      code: 0
+    }
+  }
 }
