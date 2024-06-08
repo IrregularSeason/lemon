@@ -22,4 +22,4 @@ import { Product } from './product.entity';
   controllers: [ProductsController],
   providers: [ProductsService, Repository],
 })
-export class ProductsModule { }
+export class ProductsModule {}

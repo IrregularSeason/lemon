@@ -25,4 +25,4 @@ import { Repository } from 'typeorm';
   providers: [UserService, Repository],
   exports: [UserService],
 })
-export class UserModule { }
+export class UserModule {}
