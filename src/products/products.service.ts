@@ -25,4 +25,12 @@ export class ProductsService {
       code: 0,
     };
   }
+  async removeProduct(id: number) {
+    await this.repository.delete({
+      id,
+    });
+    return {
+      code: 0,
+    };
+  }
 }

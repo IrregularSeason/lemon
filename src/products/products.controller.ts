@@ -15,4 +15,10 @@ export class ProductsController {
   async addProduct(@Body() body: Product) {
     return this.productsService.addProduct(body);
   }
+
+  @Post('remove')
+  async removeProduct(@Body() body) {
+    const { id } = body;
+    return this.productsService.removeProduct(id);
+  }
 }
