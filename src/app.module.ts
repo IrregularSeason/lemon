@@ -6,6 +6,8 @@ import { UploadModule } from './upload/upload.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ProductsModule } from './products/products.module';
+import { CommitsModule } from './commits/commits.module';
+import { OdersModule } from './oders/oders.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { ProductsModule } from './products/products.module';
     UserModule,
     UploadModule,
     ProductsModule,
+    CommitsModule,
+    OdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
